@@ -1,65 +1,93 @@
-import Image from "next/image";
+import Link from "next/link";
+import { HeartFloat, Reveal } from "./ui/animations";
+import { ImageSlider } from "./ui/image-slider";
 
-export default function Home() {
+const storyHighlights = [
+  {
+    title: "Нежность в каждом дне",
+    text: "Сайт построен как маленькое пространство, где у каждого момента есть своё место, свет и настроение.",
+  },
+  {
+    title: "Воспоминания и обещания",
+    text: "Здесь можно хранить то, что уже было, и то, что мы хотим сделать вместе дальше.",
+  },
+  {
+    title: "Тёплая атмосфера",
+    text: "Каждый наш день наполнен незабываемыми событиями, чувствами и наполнены любовью.",
+  },
+];
+
+const heroImages = [
+  {
+    src: "/images/slide1.jpg",
+    alt: "Первая наша встреча и прогулка по Москве с совместной фотографией",
+  },
+  {
+    src: "/images/slide2.jpg",
+    alt: "Ещё одно памятное изображение в Москва Сити",
+  },
+  {
+    src: "/images/slide3.jpg",
+    alt: "Забавный кадр из игры вместе",
+  },
+  {
+    src: "/images/slide4.jpg",
+    alt: "Счастливый момент нашей прогулке на катамаране на Волге",
+  },
+  {
+    src: "/images/slide5.jpg",
+    alt: "Дневной свет наших улыбок в Крыму :3",
+  },
+  {
+    src: "/images/slide6.jpg",
+    alt: "Нежность в нашей фотографии",
+  },
+  {
+    src: "/images/slide7.jpg",
+    alt: "Любовь навсегда",
+  }
+];
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="page">
+      <HeartFloat count={18} />
+      <section className="hero-grid">
+        <Reveal className="hero-card">
+          <span className="eyebrow">Для тебя и для нас</span>
+          <h1 className="hero-title">Наш маленький мир, в котором живёт любовь.</h1>
+          <p className="hero-copy">
+            Это сайт-подарок о нас: с историей, планами на будущее, приятными
+            воспоминаниями и маленькой игрой, если захочется улыбнуться.
           </p>
+          <div className="hero-actions">
+            <Link className="button" href="/history">
+              Посмотреть историю
+            </Link>
+            <Link className="button-secondary" href="/future">
+              Наши планы
+            </Link>
+          </div>
+        </Reveal>
+      </section>
+
+      <Reveal className="hero-aside hero-slider-block">
+        <div className="slider">
+          <ImageSlider images={heroImages} />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </Reveal>
+
+      <section style={{ paddingTop: "2rem", paddingBottom: "2rem" }}>
+        <h2 className="section-title">О нас как о паре</h2>
+        <div className="panel-grid">
+          {storyHighlights.map((item, index) => (
+            <Reveal className="panel" key={index /* или item.title */}>
+              <strong>{item.title}</strong>
+              <p className="muted">{item.text}</p>
+            </Reveal>
+          ))}
         </div>
-      </main>
-    </div>
+      </section>
+    </main>
   );
 }
