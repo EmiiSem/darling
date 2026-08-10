@@ -85,9 +85,12 @@ export function ImageSlider({ images }: ImageSliderProps) {
       >
         {images.map((image) => (
           <div className="slide" key={image.src}>
-            <div className="slide-frame">
-              <img src={image.src} alt={image.alt} />
-            </div>
+            <div
+              className="slide-frame"
+              role="img"
+              aria-label={image.alt}
+              style={{ backgroundImage: `url(${image.src})` }}
+            />
           </div>
         ))}
       </div>
