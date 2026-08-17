@@ -978,8 +978,9 @@ main {
   }
 
   .timeline-row {
-    grid-template-columns: 1fr;
-    gap: 0.65rem;
+    grid-template-columns: 32px minmax(0, 1fr);
+    column-gap: 0.85rem;
+    row-gap: 0.4rem;
   }
 
   .slider {
@@ -992,22 +993,29 @@ main {
 
   .timeline-stage-line,
   .timeline-stage-fill {
-    left: 1.1rem;
-    transform: none;
+    left: 16px;
   }
 
-  .timeline-year,
-  .timeline-content {
-    justify-self: stretch;
+  .timeline-year {
+    grid-column: 2;
+    justify-self: start;
     text-align: left;
   }
 
   .timeline-spacer {
-    display: none;
+    display: flex;
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    width: 32px;
   }
 
   .timeline-dot {
-    display: none;
+    display: block;
+  }
+
+  .timeline-content {
+    grid-column: 2;
+    justify-self: stretch;
   }
 
   .game-board--pairs {
@@ -1052,17 +1060,8 @@ main {
     width: calc(100% - 1rem);
   }
 
-  .timeline-row {
-    grid-template-columns: 1fr;
-    gap: 0.55rem;
-  }
-
   .timeline-year {
-    position: static;
-  }
-
-  .timeline-bar {
-    display: none;
+    font-size: 1.25rem;
   }
 
   .game-board--pairs {
