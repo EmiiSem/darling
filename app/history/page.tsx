@@ -47,7 +47,7 @@ export default function HistoryPage() {
         </p>
       </Reveal>
 
-      <section style={{ paddingTop: "1.5rem" }}>
+      <section style={{ paddingTop: "1.5rem", paddingBottom: "3.5rem" }}>
         <Timeline items={historyItems} />
       </section>
     </main>
