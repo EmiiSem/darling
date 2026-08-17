@@ -29,22 +29,27 @@ export function Timeline({ items }: TimelineProps) {
       const top = container.getBoundingClientRect().top + window.scrollY;
       const height = Math.max(container.offsetHeight - window.innerHeight, 1);
       const progress = Math.min(Math.max((window.scrollY - top + window.innerHeight * 0.55) / height, 0), 1);
+      const viewportBottom = window.scrollY + window.innerHeight;
+      const reachedEnd = viewportBottom >= top + container.offsetHeight - 64 || progress >= 0.9;
 
       setLineProgress(progress);
+
+      if (reachedEnd) {
+        setActiveIndex(nodes.length - 1);
+      }
     };
 
     const observer = new IntersectionObserver(
       (entries) => {
         const visibleEntries = entries.filter((entry) => entry.isIntersecting);
         if (visibleEntries.length > 0) {
-          const topMost = visibleEntries.sort(
-            (left, right) => left.boundingClientRect.top - right.boundingClientRect.top,
-          )[0];
-          const index = Number(topMost.target.getAttribute("data-index") ?? 0);
-          setActiveIndex(index);
+          const farthest = Math.max(
+            ...visibleEntries.map((entry) => Number(entry.target.getAttribute("data-index") ?? 0)),
+          );
+          setActiveIndex((current) => Math.max(current, farthest));
         }
       },
-      { rootMargin: "-18% 0px -48% 0px", threshold: 0.2 },
+      { rootMargin: "-12% 0px -22% 0px", threshold: 0.12 },
     );
 
     nodes.forEach((node) => observer.observe(node));
