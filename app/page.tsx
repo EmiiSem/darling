@@ -17,33 +17,35 @@ const storyHighlights = [
   },
 ];
 
+const asset = (path: string) => `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${path}`;
+
 const heroImages = [
   {
-    src: "/images/slide1.jpg",
+    src: asset("/images/slide1.jpg"),
     alt: "Первая наша встреча и прогулка по Москве с совместной фотографией",
   },
   {
-    src: "/images/slide2.jpg",
+    src: asset("/images/slide2.jpg"),
     alt: "Ещё одно памятное изображение в Москва Сити",
   },
   {
-    src: "/images/slide3.jpg",
+    src: asset("/images/slide3.jpg"),
     alt: "Забавный кадр из игры вместе",
   },
   {
-    src: "/images/slide4.jpg",
+    src: asset("/images/slide4.jpg"),
     alt: "Счастливый момент нашей прогулке на катамаране на Волге",
   },
   {
-    src: "/images/slide5.jpg",
+    src: asset("/images/slide5.jpg"),
     alt: "Дневной свет наших улыбок в Крыму :3",
   },
   {
-    src: "/images/slide6.jpg",
+    src: asset("/images/slide6.jpg"),
     alt: "Нежность в нашей фотографии",
   },
   {
-    src: "/images/slide7.jpg",
+    src: asset("/images/slide7.jpg"),
     alt: "Любовь навсегда",
   }
 ];
